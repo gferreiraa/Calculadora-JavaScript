@@ -1,22 +1,61 @@
 class CalcController {
 
     constructor(){ // Chamado automaticamente junto a instância de uma classe
-        this._displayCalc = 0; // Por convensão _nome refere-se a um atribuito privado.
+        // this._displayCalc = 0; Por convensão _nome refere-se a um atribuito privado.
+        this._locale = 'pt-BR';
+        this._displayCalcEl = document.querySelector('#display');
+        this._dateEl = document.querySelector('#data');
+        this._timeEl = document.querySelector('#hora');
         this._currentDate;
         this.initialize();
     }
 
+    // Seta o valor para Data e Hora
     initialize(){
 
-        let displayCalcEl = document.querySelector('#display');
-        let dateEl = document.querySelector('#data');
-        let timeEl = document.querySelector('#hora');
+        this.setDisplayDateTime();
 
-        displayCalcEl.innerHTML = '4567';
-        dateEl.innerHTML = '01/05/2020';
-        timeEl.innerHTML = '00:00';
+        setInterval(()=>{
 
+            this.setDisplayDateTime();
+
+        }, 1000);
     }
+
+    // Captura Eventos de clique
+    initButtonEvents(){
+        
+        let buttons = document.querySelectorAll("#buttons > g, #parts > g");
+    
+    }
+
+    setDisplayDateTime(){
+        this.displayDate = this.currentDate.toLocaleDateString(this._locale, {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        });
+        this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+    }
+
+    // Time
+    get displayTime(){
+        this._timeEl.innerHTML;
+    }
+
+    set displayTime(value){
+        this._timeEl.innerHTML = value;
+    }
+    
+    // Date
+    get displayDate(){
+        this._dateEl.innerHTML;
+    }
+
+    set displayDate(value){
+        this._dateEl.innerHTML = value;
+    }
+
 
     // Retorna uma valor.
     get displayCalc(){
@@ -28,7 +67,7 @@ class CalcController {
     }
 
     get currentDate(){
-        return this._currentDate;
+        return new Date();
     }
 
     set currentDate(valor){
