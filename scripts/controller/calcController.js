@@ -53,6 +53,10 @@ class CalcController {
         return this._operation[this._operation.length -1];
     }
 
+    setLastOperation(value){
+        return this._operation[this._operation.length -1] = value;
+    }
+
     isOperator(value){
 
         return(['+', '-', '*', '/', '%'].indexOf(value) > -1);
@@ -63,11 +67,11 @@ class CalcController {
     // Adiciona item clicado ao array
     addOperation(value){
 
-        if(isNaN(getLastOperation())){
+        if(isNaN(this.getLastOperation())){
             // String
             if(this.isOperator(value)){
                 // Trocar o operador 
-                this._operation[this._operation.length -1] = value;
+                this.setLastOperation(value);
             } else if(isNaN(value)){
                // Outra Coisa
 
@@ -78,7 +82,7 @@ class CalcController {
         } else {
             // Number
             let newValue = this.getLastOperation().toString() + value.toString();
-            this._operation.push(newValue);
+            this.setLastOperation(newValue);
         }
 
 
