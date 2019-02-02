@@ -33,21 +33,62 @@ class CalcController {
         });
 
     }
+
     // Botão CE
     clearAll(){
+
         this._operation = [];
+
     }
+
     // Botão CA
     clearEntry(){
+
         this._operation.pop();
+
     }
-    // 
+    // Pega o último item do array
+    getLastOperation(){
+
+        return this._operation[this._operation.length -1];
+    }
+
+    isOperator(value){
+
+        return(['+', '-', '*', '/', '%'].indexOf(value) > -1);
+
+    }
+
+
+    // Adiciona item clicado ao array
     addOperation(value){
-        this._operation.push(value);
+
+        if(isNaN(getLastOperation())){
+            // String
+            if(this.isOperator(value)){
+                // Trocar o operador 
+                this._operation[this._operation.length -1] = value;
+            } else if(isNaN(value)){
+               // Outra Coisa
+
+            } else {
+                this._operation.push(value);
+            }
+
+        } else {
+            // Number
+            let newValue = this.getLastOperation().toString() + value.toString();
+            this._operation.push(newValue);
+        }
+
+
     }
+
     // Error    
     setError(){
+
         this.displayCalc = 'Error';
+
     }
 
     execBtn(value){
@@ -63,31 +104,31 @@ class CalcController {
             break; 
             
             case 'soma':
-            this.clearEntry();
+            this.addOperation('+');
             break;            
 
             case 'subtracao':
-            this.clearEntry();
+            this.addOperation('-');
             break; 
 
             case 'divisao':
-            this.clearEntry();
+            this.addOperation('/');
             break;
 
             case 'multiplicacao':
-            this.clearEntry();
-            break;
-
-            case 'subtracao':
-            this.clearEntry();
+            this.addOperation('*');
             break;
 
             case 'porcento':
-            this.clearEntry();
+            this.addOperation('%');
             break;
 
             case 'igual':
             this.clearEntry();
+            break;
+
+            case 'ponto':
+            this.addOperation('.');
             break;
 
             case '0':
