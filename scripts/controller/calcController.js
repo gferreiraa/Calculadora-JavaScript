@@ -63,29 +63,27 @@ class CalcController {
 
     }
 
-
     // Adiciona item clicado ao array
     addOperation(value){
+        console.log('a', isNaN(this.getLastOperation()));
 
-        if(isNaN(this.getLastOperation())){
-            // String
-            if(this.isOperator(value)){
-                // Trocar o operador 
+        if(isNaN(this.getLastOperation())) {
+            
+            if(this.isOperator(value)) {
+
                 this.setLastOperation(value);
-            } else if(isNaN(value)){
-               // Outra Coisa
+            
+            } else if(isNaN(value)) {
 
             } else {
                 this._operation.push(value);
             }
 
         } else {
-            // Number
-            let newValue = this.getLastOperation().toString() + value.toString();
-            this.setLastOperation(newValue);
+           let newValue = this.getLastOperation().toString() + value.toString();
+           this.setLastOperation(parseInt(newValue));
         }
-
-
+        console.log(this._operation);
     }
 
     // Error    
@@ -161,12 +159,12 @@ class CalcController {
 
         buttons.forEach((btn, index) => {
 
-            this.addEventListenerAll(btn, 'click drag mouseover', e => {
+            this.addEventListenerAll(btn, 'click drag', e => {
                 let textBtn = btn.className.baseVal.replace('btn-', '');
                 this.execBtn(textBtn);
             });
 
-            this.addEventListenerAll(btn, "mouseover mouseup mousedown", e => {
+            this.addEventListenerAll(btn, "mouseover", e => {
                 btn.style.cursor = "pointer";
             });
 
