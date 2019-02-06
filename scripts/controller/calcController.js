@@ -2,6 +2,7 @@ class CalcController {
 
     constructor() {
 
+        this._locale = 'pt-BR'
         this._displayCalcEl = document.querySelector('#display');
         this._dateEl = document.querySelector('#data');
         this._timeEl = document.querySelector('#hora');
@@ -12,11 +13,37 @@ class CalcController {
     
     initialize(){
 
+        this.setDisplayDateTime();
 
+        setInterval(() => {
 
-        //dateEl.innerHTML = '10/12/2099';
-        //timeEl.innerHTML = '23:59'; // propriedade que inseri um 'valor' no HTML
+        this.setDisplayDateTime();
 
+        }, 1000);
+
+    }
+
+    setDisplayDateTime(){
+
+        this.displayDate = this.currentDate.toLocaleDateString(this._locale);
+        this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+
+    }
+
+    get displayTime(){           // get time
+        return this._timeEl.innerHTML;
+    }
+
+    set displayTime(value){
+        return this._timeEl.innerHTML = value;
+    }
+
+    get displayDate(){          // get date
+        return this._dateEl.innerHTML;
+    }
+
+    set displayDate(value){
+        return this._dateEl.innerHTML = value;
     }
 
     get displayCalc(){           // get and set para display
@@ -28,7 +55,7 @@ class CalcController {
     }
     
     get currentDate(){           // get and set para data
-        return this._currentDate;
+        return new Date();
     }
 
     set currentDate(value){
