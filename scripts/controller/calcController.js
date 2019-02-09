@@ -45,6 +45,12 @@ class CalcController {
 
     }
 
+    setError() {
+
+        this.displayCalc = 'Error';
+
+    }
+
     execBtn(value) {
 
         switch(value) {
@@ -72,6 +78,9 @@ class CalcController {
                 break;
             case  'igual':
                     
+                break;
+            default:
+                this.setError();
                 break;
         }
 
