@@ -49,7 +49,7 @@ class CalcController {
 
     getLastOperation() {
 
-        return this._operation[this._operation -1];
+        return this._operation[this._operation.length -1];
 
     }
 
