@@ -8,8 +8,8 @@ class CalcController {
         this._dateEl = document.querySelector('#data');
         this._timeEl = document.querySelector('#hora');
         this._currentDate;
-        this.initButtonsEvents()
-
+        this.initialize();
+        this.initButtonsEvents();
 
     }
     
